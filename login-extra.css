@@ -1,0 +1,109 @@
+/* Estilos adicionales específicos para login.html */
+
+/* Contenedor de contraseña mejorado */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container #clave {
+    padding-right: 50px !important;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: rgba(248, 250, 252, 0.7);
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    top: 50%;
+    transform: translateY(-60%);
+    z-index: 10;
+}
+
+#togglePassword:hover {
+    color: var(--primary-blue);
+    transform: translateY(-60%) scale(1.1);
+}
+
+#togglePassword i {
+    font-size: 14px;
+}
+
+/* Estilos específicos para el dropdown de entidades */
+#entidad {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-light) !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+    padding-right: 50px !important;
+    cursor: pointer;
+}
+
+#entidad option {
+    background: var(--bg-card) !important;
+    color: var(--text-light) !important;
+    padding: 12px 16px;
+    border: none;
+}
+
+#entidad option:hover,
+#entidad option:focus {
+    background: var(--bg-card-light) !important;
+    color: var(--text-light) !important;
+}
+
+#entidad option:checked {
+    background: var(--primary-blue) !important;
+    color: var(--text-light) !important;
+}
+
+#entidad:focus {
+    outline: none !important;
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 0 20px rgba(37, 99, 235, 0.2) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: translateY(-1px);
+}
+
+/* Mejoras para navegación en móvil */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+        justify-content: center;
+    }
+    
+    .nav-logo {
+        margin-right: 0;
+    }
+    
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+    
+    #entidad {
+        background-position: right 12px center !important;
+        padding-right: 40px !important;
+    }
+}

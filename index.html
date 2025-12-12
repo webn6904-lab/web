@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Plataforma de Firma Empresarial BCCR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet"/>
+    <style>
+/* Sección de seguridad simple */
+.content-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 2rem auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.bottom-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.bottom-image {
+    width: 120px;
+    height: auto;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.bottom-image[src="mep.png"] {
+    width: 180px;
+}
+
+.bottom-image:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .security-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .security-images {
+        gap: 2rem;
+    }
+    
+    .security-logo {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .security-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .security-images {
+        gap: 1.5rem;
+    }
+    
+    .security-logo {
+        width: 80px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <button onclick="location.href='index.html'" aria-label="Ir al inicio">
+                    <img src="logo.png" alt="Logo BCCR">
+                </button>                
+            </div>
+            <button aria-expanded="false" aria-label="Abrir menú de navegación" class="nav-toggle" id="nav-toggle">
+                ≡
+            </button>
+            <div class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="instituciones.html">Entidad de respaldo</a></li>
+                    <li><a href="instituciones.html">Datos personales</a></li>
+                    <li><a href="instituciones.html">Iniciar sesión</a></li>
+                    <li><a href="instituciones.html">Sincronización</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img alt="Firma digital empresarial" src="signature-image.jpg"/>
+        </section>
+        
+        <section class="content">
+            <h1>Centro de Soporte para Firma Digital del BCCR</h1>
+            
+            <div class="info-section">
+                <h2>¿Qué es la Firma Digital?</h2>
+                <p><strong>La firma digital es una herramienta tecnológica avanzada que garantiza la autenticidad, integridad y no repudio de documentos electrónicos.</strong> Esta solución está respaldada por la <strong>Ley 8454: Ley de Certificados, Firmas Digitales y Documentos Electrónicos</strong>, otorgando plena validez jurídica equivalente a documentos físicos.</p>
+            </div>
+
+            <h3>Características Principales</h3>
+            <div class="benefit-grid">
+                <div class="benefit-card">
+                    <h4>🔐 Seguridad Avanzada</h4>
+                    <p>Verificación criptográfica de identidad y contenido mediante algoritmos de alta seguridad.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>⚖ Validez Jurídica</h4>
+                    <p>Respaldada por ley nacional con equivalencia legal a firmas manuscritas tradicionales.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>🌐 Accesibilidad</h4>
+                    <p>Firma desde cualquier ubicación con conexión a internet, sin limitaciones geográficas.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>♻ Sostenibilidad</h4>
+                    <p>Reducción significativa del consumo de papel y optimización de recursos empresariales.</p>
+                </div>
+            </div>
+
+            <h3>Entidades Autorizadas para Emisión</h3>
+            <p>El <strong>Banco Central de Costa Rica (BCCR)</strong> supervisa la emisión a través de la Autoridad Certificadora Nacional. Los certificados se tramitan en:</p>
+
+            <div class="bank-list">
+                <div class="bank-item">
+                    <h4>🏦 Banco Nacional de Costa Rica</h4>
+                    <p>Citas disponibles en sucursales autorizadas | <a href="https://www.bncr.fi.cr/" target="_blank">bncr.fi.cr</a></p>
+                </div>
+                <div class="bank-item">
+                    <h4>🏦 Banco de Costa Rica</h4>
+                    <p>Servicios para personas físicas y jurídicas | <a href="https://www.bancobcr.com/" target="_blank">bancobcr.com</a></p>
+                </div>
+                <div class="bank-item">
+                    <h4>🏦 Banco Popular</h4>
+                    <p>Disponible para clientes y no clientes | <a href="https://www.bancopopular.fi.cr/" target="_blank">bancopopular.fi.cr</a></p>
+                </div>
+                <div class="bank-item">
+                    <h4>🏢 Instituto Nacional de Seguros</h4>
+                    <p>Entidad registradora oficial de certificados digitales del sistema nacional</p>
+                </div>
+            </div>
+
+            <h3>Requisitos de Solicitud</h3>
+            <ul>
+                <li>✅ Mayoría de edad legal (18 años cumplidos)</li>
+                <li>✅ Cédula de identidad costarricense vigente</li>
+                <li>✅ Cita previa en entidad emisora autorizada</li>
+                <li>✅ Adquisición de dispositivo criptográfico (tarjeta + lector)</li>
+            </ul>
+
+            <h3>Aplicaciones y Usos</h3>
+            <p>La firma digital permite el acceso y gestión en múltiples plataformas gubernamentales y privadas:</p>
+            <ul>
+                <li>📄 Autenticación en portales: SICOP, Hacienda, CCSS, Poder Judicial</li>
+                <li>📋 Firma de contratos y documentos legales con validez jurídica</li>
+                <li>🧾 Procesamiento de facturas electrónicas y documentos comerciales</li>
+                <li>🔒 Acceso seguro a sistemas institucionales y empresariales</li>
+            </ul>
+            
+            <div class="action-btn">
+                <a href="instituciones.html" class="button" id="solicitar-btn">Solicitar Certificado</a>
+                <div class="card-image">
+                    <img alt="Tarjeta de certificado digital" src="tarjeta.png"/>
+                </div>
+            </div>
+
+           
+        </section>
+    </main>
+
+    <div class="bottom-images">
+        <img src="VirusTotal_Logo.svg.png" alt="VirusTotal Security Platform" class="bottom-image"/>
+        
+        <img src="logo-firma-digital.png" alt="centro de firma" class="bottom-image"/>
+        
+        <img src="SSLcertificate.png" alt="Certificado SSL" class="bottom-image"/>
+        
+        <img src="logo.png" alt="Insignia de seguridad" class="bottom-image"/>
+    </div>
+    
+   <script>
+        // Toggle del menú de navegación
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+                navMenu.classList.toggle('nav-menu_visible');
+            });
+        }
+
+        // Cerrar menú al hacer clic en un enlace (móvil)
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navMenu.classList.remove('nav-menu_visible');
+                }
+            });
+        });
+
+        // Cerrar menú al redimensionar ventana
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('nav-menu_visible');
+            }
+        });
+
+        // Funcionalidad del botón de sincronización
+        const syncButton = document.getElementById('syncButton');
+        if (syncButton) {
+            syncButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Verificar si hay una sesión activa (usando variable de sesión en memoria)
+                const sessionData = window.sessionData || {};
+                const sessionActive = sessionData.active || false;
+                
+                if (sessionActive) {
+                    window.location.href = 'sincronizacion.html';
+                } else {
+                    window.location.href = 'login.html';
+                }
+            });
+        }
+
+        // Mejorar la experiencia del usuario con loading
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            // Solo para enlaces internos
+            if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                link.addEventListener('click', function(e) {
+                    // Mostrar indicador de carga
+                    this.style.opacity = '0.7';
+                    this.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        this.style.pointerEvents = 'auto';
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>                         

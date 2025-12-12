@@ -1,0 +1,701 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    position: relative;
+    z-index: 100;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Login container */
+.validation-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 3rem;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.validation-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-weight: 300;
+}
+
+.validation-section p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* User type buttons */
+.user-type-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 2rem;
+}
+
+.user-type-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-type-btn.persona {
+    background: linear-gradient(135deg, #ff7b39, #ff9f43);
+    color: white;
+}
+
+.user-type-btn.empresa {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+.user-type-btn.banca-movil {
+    background: linear-gradient(135deg, #cd853f, #d4a574);
+    color: white;
+}
+
+.user-type-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.user-type-btn.active {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Login form */
+.login-form {
+    margin: 2rem 0;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.login-input {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 50px;
+    border: 2px solid #e1e8ed;
+    border-radius: 25px;
+    font-size: 1rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.login-input:focus {
+    border-color: #ff7b39;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 123, 57, 0.1);
+}
+
+.input-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #6c757d;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(108, 117, 125, 0.3);
+}
+
+/* Checkboxes */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff7b39;
+}
+
+.checkbox-item label {
+    font-size: 0.9rem;
+    color: #495057;
+    cursor: pointer;
+}
+
+/* Links */
+.auth-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.auth-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: #ff7b39;
+}
+
+.auth-link-icon {
+    font-size: 1.1rem;
+}
+
+/* Conecta BP Mujer section */
+.bp-mujer-section {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.bp-mujer-title {
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+}
+
+.bp-mujer-description {
+    font-size: 0.85rem;
+    color: #424242;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.bp-mujer-link {
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.bp-mujer-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: white;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.logo-firma {
+    height: 80px;
+    width: auto;
+}
+
+/* Progress bar (mantener del código original) */
+.progress-container {
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff7b39, #ff9f43);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#progress-text {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #ff7b39;
+}
+
+/* Card section (mantener del código original) */
+.card-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.card-section.expanded {
+    max-height: 500px;
+}
+
+.card-expiry-cvv-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.card-expiry-cvv-container > div {
+    flex: 1;
+}
+
+/* Form elements */
+form {
+    margin: 1.5rem 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #495057;
+    text-align: left;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ff7b39;
+    box-shadow: 0 0 0 3px rgba(255, 123, 57, 0.1);
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .validation-section {
+        margin: 1rem;
+        padding: 2rem;
+    }
+    
+    .navbar {
+        padding: 0 1rem;
+    }
+    
+    .card-expiry-cvv-container {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* Floating action buttons (sidebar) */
+.floating-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #8e44ad;
+    border-radius: 15px 0 0 15px;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+}
+
+.floating-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+/* Utilities */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para botones de tarjeta */
+
+/* Botón "Agregar Tarjeta" */
+button[onclick="toggleCardSection()"] {
+    width: 100%;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button[onclick="toggleCardSection()"]:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+button[onclick="toggleCardSection()"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+button[onclick="toggleCardSection()"]:hover:before {
+    left: 100%;
+}
+
+button[onclick="toggleCardSection()"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Agregar icono al botón Agregar Tarjeta */
+button[onclick="toggleCardSection()"]:after {
+    content: '+';
+    background: rgba(255,255,255,0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Botón "Guardar Tarjeta" */
+#cardButton {
+    width: 100%;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+#cardButton:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+#cardButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(135deg, #1e7e34, #155724);
+}
+
+#cardButton:hover:before {
+    left: 100%;
+}
+
+#cardButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+/* Agregar icono al botón Guardar Tarjeta */
+#cardButton:after {
+    content: '✓';
+    background: rgba(255,255,255,0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Estados deshabilitados */
+button[onclick="toggleCardSection()"]:disabled,
+#cardButton:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+button[onclick="toggleCardSection()"]:disabled:hover,
+#cardButton:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    background: #6c757d;
+}
+
+/* Efecto de carga para el botón Guardar Tarjeta */
+#cardButton.loading {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    cursor: wait;
+    position: relative;
+}
+
+#cardButton.loading:after {
+    content: '';
+    margin-left: 10px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Variante con iconos alternativos usando símbolos */
+.btn-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Icono para agregar tarjeta (versión alternativa) */
+button[onclick="toggleCardSection()"].icon-alt:after {
+    content: '+';
+    background: rgba(255,255,255,0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Icono para guardar tarjeta (versión alternativa) */
+#cardButton.icon-alt:after {
+    content: '✓';
+    background: rgba(255,255,255,0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Responsive para botones */
+@media (max-width: 768px) {
+    button[onclick="toggleCardSection()"],
+    #cardButton {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Efectos de pulsación para móviles */
+@media (hover: none) {
+    button[onclick="toggleCardSection()"]:active,
+    #cardButton:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Variante de botones más pequeños si se necesita */
+.btn-card-small {
+    padding: 10px 20px !important;
+    font-size: 0.85rem !important;
+    border-radius: 8px !important;
+}
+
+/* Botones en línea si se necesitan uno al lado del otro */
+.card-buttons-inline {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.card-buttons-inline button {
+    flex: 1;
+    margin: 0;
+}
+
+/* Efecto de éxito temporal */
+.btn-success-flash {
+    background: linear-gradient(135deg, #20c997, #17a2b8) !important;
+    animation: successFlash 0.6s ease;
+}
+
+@keyframes successFlash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}

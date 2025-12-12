@@ -1,0 +1,61 @@
+#userNameArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+#loginImage {
+  width: 30px; /* aseguramos que tenga unidad */
+  margin-bottom: 8px; /* espacio entre la imagen y el input */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Cuadro de alerta */
+.custom-alert {
+  display: none;
+  background-color: #b3b3b3; /* gris claro mejorado */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  max-width: 360px;
+  font-size: 14px;
+}
+
+/* Botón dentro del mensaje */
+.custom-alert button {
+  margin-top: 8px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+/* Campos de texto más grises y estilizados */
+input[type="text"],
+input[type="password"] {
+  background-color: #a6a6a6;  /* un poco más gris */
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  margin: 6px 0;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: white;
+  opacity: 0.9;
+}

@@ -1,0 +1,164 @@
+/* Reseteo básico para los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos específicos para la sección de validación */
+.validation-section {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.validation-section h2 {
+    font-size: 28px;
+    color: #004aad;
+    margin-bottom: 20px;
+}
+
+.validation-section p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Botón de envío y botón de continuar */
+button[type="submit"], #continueButton, #sendCodeButton {
+    background-color: #004aad;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover, #continueButton:hover, #sendCodeButton:hover {
+    background-color: #003080;
+}
+
+/* Mensaje de actualización exitosa */
+#updateStatus {
+    font-size: 18px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+/* Estilo del contenedor de la imagen de progreso */
+.progress-container {
+    margin-bottom: 20px;
+}
+
+#progress-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos para la barra de progreso */
+.progress-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%; /* Comienza en 0% */
+    background-color: #76c7c0;
+    transition: width 0.5s ease; /* Transición suave para el ancho */
+}
+
+#progress-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #004aad;
+}
+
+/* Estilos del logo en el footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .logo-firma {
+    max-width: 350px;
+    height: auto;
+}
+
+/* Estilo para los botones */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #003080;
+}
+
+/* Estilos para la card-section */
+.card-section {
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.5s ease-out, padding 0.5s ease-out;
+    padding: 0;
+    white-space: nowrap; /* Para evitar que se rompa el contenido */
+    display: inline-block;
+    vertical-align: top;
+    position: absolute; /* Hace que se posicione fuera del flujo normal */
+    left: 110%; /* Empieza un poco más hacia la derecha que antes */
+    top: 50px; /* Ajusta este valor para moverlo hacia abajo */
+    width: 500px; /* El ancho total que tendrá la card-section al expandirse */
+}
+
+/* Estilo para la card-section cuando se expanda */
+.card-section.expanded {
+    max-width: 500px; /* Ajusta según el contenido */
+    padding-left: 20px; /* Añadir espacio de padding cuando se expanda */
+    left: calc(110% - 20px); /* Mover la card-section más hacia la derecha */
+    top: 50px; /* Mantener la misma distancia hacia abajo al expandirse */
+}
